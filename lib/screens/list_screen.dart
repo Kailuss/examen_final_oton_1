@@ -5,17 +5,7 @@ import 'package:examen_final_oton_1/utils/app_colors.dart';
 import 'package:examen_final_oton_1/widgets/list_tile_widget.dart';
 import 'package:examen_final_oton_1/widgets/empty_state_widget.dart';
 
-/// PANTALLA DE LISTA - VERSIÓN API
-///
-/// Esta versión está adaptada para trabajar con API REST en lugar de SQLite.
-///
-/// CAMBIOS PRINCIPALES:
-/// - Manejo de estados de carga (isLoading)
-/// - Manejo de errores de red con try-catch
-/// - Indicadores visuales para operaciones HTTP
-/// - Pull-to-refresh para recargar datos
-/// - Manejo de timeouts y errores de conexión
-/// - Uso del widget ItemTileWidget centralizado para la presentación
+/// PANTALLA DE LISTA
 class ListScreen extends StatefulWidget {
   const ListScreen({super.key});
 
@@ -57,7 +47,7 @@ class _ListScreenState extends State<ListScreen> {
 
   /// CONSTRUCCIÓN DE LA APPBAR
   AppBar buildAppBar(BuildContext context) {
-    return AppBar(title: const Text('Lista de elementos'), centerTitle: true);
+    return AppBar(title: const Text('Próximos lanzamientos'), centerTitle: true);
   }
 
   /// CONSTRUCCIÓN DEL CUERPO CON PULL-TO-REFRESH

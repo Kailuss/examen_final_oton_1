@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:examen_final_oton_1/models/launch_model.dart';
 import 'package:examen_final_oton_1/screens/info_screen.dart';
 
@@ -22,7 +23,7 @@ class ItemTileWidget extends StatelessWidget {
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         leading: _buildLeadingWidget(context),
-        //TODO title: Text(launch.name, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+        title: Text(launch.name, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
         subtitle: _buildSubtitle(context),
         trailing: _buildTrailingWidget(context),
         onTap: isLoading ? null : (onTap ?? () => _navigateToInfo(context)),
@@ -39,7 +40,7 @@ class ItemTileWidget extends StatelessWidget {
           launch.image!,
           width: 56,
           height: 56,
-          fit: BoxFit.scaleDown,
+          fit: BoxFit.cover,
           loadingBuilder: (context, child, loadingProgress) {
             if (loadingProgress == null) return child;
             return _buildDefaultIcon(context);
@@ -76,9 +77,8 @@ class ItemTileWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 4),
-        Text(
-          '${launch.pad ?? 'N/A'} • ${launch.net}',
+        const SizedBox(height: 4),        Text(
+          '${launch.name} • ${_formatDate(launch.net)}',
           style: TextStyle(
             color: Theme.of(context).colorScheme.onSurfaceVariant,
             fontSize: 14,
@@ -105,9 +105,14 @@ class ItemTileWidget extends StatelessWidget {
       color: Theme.of(context).colorScheme.onSurfaceVariant,
     );
   }
-
   /// NAVEGACIÓN A PANTALLA DE INFORMACIÓN
   void _navigateToInfo(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => InfoScreen(launch: launch)));
+  }
+
+  /// FORMATEAR FECHA
+  String _formatDate(DateTime date) {
+    final DateFormat formatter = DateFormat('dd/MM/yyyy HH:mm');
+    return formatter.format(date);
   }
 }
